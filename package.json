@@ -6,11 +6,18 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "bootstrap": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "fs": "0.0.1-security",
     "imagekitio-react": "^1.0.9",
     "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "read-excel-file": "^5.1.0",
+    "superagent": "^6.1.0",
+    "web-vitals": "^1.1.2",
+    "xlsx": "^0.17.0"
   },
   "scripts": {
     "start": "react-scripts start",
