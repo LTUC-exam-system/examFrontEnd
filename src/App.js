@@ -1,43 +1,37 @@
 import './App.css';
-import { IKContext, IKUpload } from 'imagekitio-react';
-import { useState } from 'react';
-
-
+import { Route, Switch, BrowserRouter,Redirect} from 'react-router-dom';
+import {AuthContext} from "./context/signinContext";
+import { useContext } from 'react';//we need to use this in routing after add the other context
+import SignIn from './components/usersComponents/users/signIn';
+import Table from "./components/usersComponents/students/table";
 
 
 
 function App() {
-  const [imageUrl, setImageUrl] = useState(" ");
-
-
-  const onError = err => {
-    console.log("Error", err);
-  };
-
-  const onSuccess = res => {
-    console.log("Success", res);
-    let newImageUrl = res.url;
-    console.log(newImageUrl);
-    setImageUrl(newImageUrl);
-  };
-
+  const context=useContext(AuthContext);
   return (
-    <div className="App">
-
-      <IKContext
-        publicKey="public_4ErrBHn0GIqK+C5u6R869pWZJVg="
-        urlEndpoint="https://ik.imagekit.io/ajyscsf1bof"
-        transformationPosition="path"
-        authenticationEndpoint="http://localhost:3030/addImage">  {/* this chould be changed from local */}
-
-        {/* // Image upload */}
-        <IKUpload fileName="my-upload"
-          onError={onError}
-          onSuccess={onSuccess}
-        />
-      </IKContext>
-    </div>
-  );
+  <>
+  <BrowserRouter>
+  <Switch>
+    <Route exact path='/'>
+    <div>welcome </div>
+    </Route>
+    <Route exact path='/table'>
+    {
+        !context.loggedIn?<Redirect to="/signin"/>:<Table/>
+      }
+     
+    </Route>
+    <Route exact path='/signin'>
+      {
+        !context.loggedIn?<SignIn/>:<Redirect to="/table"/>
+      }
+    
+    </Route>
+  </Switch>
+  </BrowserRouter>
+  </>
+  )
 }
 
 export default App;
